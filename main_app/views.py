@@ -240,6 +240,7 @@ def profile(request):
 		profile = Profile.objects.get(user=request.user)
 		sellingItems = Item.objects.all().filter(user=request.user, sold=False)
 		soldItems = Item.objects.all().filter(user=request.user, sold=True)
+		foreign_view = False
 		try: 
 			reviews = Review.objects.all().filter(seller=request.user)
 		except:
@@ -249,7 +250,8 @@ def profile(request):
 			'profile': profile, 
 			'selling_items': sellingItems, 
 			'sold_items': soldItems, 
-			'reviews': reviews
+			'reviews': reviews,
+			"foreign_view": foreign_view
 		})
 	except:
 		print('NO PROFILE')
@@ -261,6 +263,7 @@ def get_profile(request, user_id):
 		selling_items = Item.objects.all().filter(user_id=user_id, sold=False)
 		soldItems = Item.objects.all().filter(user_id=user_id, sold=False)
 		seller = User.objects.get(id=user_id)
+		foreign_view = True
 		print("SELLER:", seller)
 		try: 
 			reviews = Review.objects.all().filter(seller=seller)
@@ -273,7 +276,8 @@ def get_profile(request, user_id):
 			"profile": profile, 
 			"selling_items": selling_items, 
 			"sold_items": soldItems,
-			"reviews": reviews
+			"reviews": reviews,
+			"foreign_view": foreign_view
 		})
 	except:
 		print("NO PROFILE")

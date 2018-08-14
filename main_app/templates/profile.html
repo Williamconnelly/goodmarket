@@ -8,7 +8,9 @@
 				<h3 class="profile-user-title">{{profile.user}}</h3>
 				<div class="profile-location">
 					<h5>{{profile.location}}</h5>
+					{% if foreign_view == False %}
 					<a href="/profile/update">Edit Profile</a>
+					{% endif %}
 				</div>
 			</div>
 			<div style="background-image: url(/media/{{profile.image}})" class="profile-picture">
